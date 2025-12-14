@@ -212,53 +212,109 @@
             animation: pulse 2s infinite;
         }
 
-        /* --- NEW BIRTHDAY CARD STYLES --- */
-        .birthday-card {
+        /* --- CHRISTMAS CARD STYLES --- */
+        .christmas-card {
             position: relative;
             z-index: 20;
             margin-top: 30px;
             padding: 20px 40px;
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400%;
+            /* Gradient: Red, Gold, White, Red */
+            background: linear-gradient(135deg, #b30000, #ff0000, #d4af37, #ffffff, #b30000);
+            background-size: 400% 400%;
             border-radius: 15px;
-            border: 4px solid #ffffff;
-            box-shadow: 0 0 20px #ff00c8, 
-                        0 0 40px #00ffd5,
-                        inset 0 0 20px rgba(255,255,255,0.5);
-            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Intentionally clashing font */
+            /* Gold border */
+            border: 4px solid #d4af37;
+            /* Glowing red/gold shadow */
+            box-shadow: 0 0 20px #ff0000, 
+                        0 0 40px #d4af37,
+                        inset 0 0 20px rgba(255,255,255,0.2);
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
             text-align: center;
-            animation: glowing-rainbow 10s linear infinite, bounce 2s infinite ease-in-out;
+            animation: glowing-xmas 5s ease infinite, bounce 2s infinite ease-in-out;
             transform: rotate(-3deg);
             max-width: 90%;
+            overflow: hidden; /* Contains the snow */
         }
 
-        .birthday-title {
+        .xmas-title {
+            position: relative;
+            z-index: 2; /* Text above snow */
             color: #ffffff;
             font-size: 2.5rem;
             font-weight: bold;
-            text-shadow: 3px 3px 0px #000000;
+            text-shadow: 3px 3px 0px #b30000, 0 0 10px white;
             margin: 0;
             line-height: 1.2;
-            -webkit-text-stroke: 1px black;
+            -webkit-text-stroke: 1px #d4af37;
         }
 
-        .birthday-sub {
-            color: #ffff00;
-            font-size: 1.2rem;
+        .xmas-sub {
+            position: relative;
+            z-index: 2; /* Text above snow */
+            color: #d4af37; /* Gold Text */
+            font-size: 1.5rem;
             font-weight: bold;
-            text-shadow: 2px 2px 0px #ff0000;
+            text-shadow: 2px 2px 0px #b30000;
             margin-top: 5px;
+            background: rgba(0,0,0,0.2);
+            padding: 2px 10px;
+            border-radius: 10px;
+            display: inline-block;
         }
 
-        @keyframes glowing-rainbow {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+        @keyframes glowing-xmas {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-10px) rotate(3deg); }
+            50% { transform: translateY(-5px) rotate(-3deg); }
+        }
+
+        /* --- SNOW ANIMATION INSIDE CARD --- */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Below text */
+            pointer-events: none;
+        }
+
+        .snow-layer {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background-image: 
+                radial-gradient(4px 4px at 20px 30px, white, transparent),
+                radial-gradient(4px 4px at 150px 80px, white, transparent),
+                radial-gradient(3px 3px at 80px 120px, white, transparent),
+                radial-gradient(4px 4px at 250px 200px, white, transparent),
+                radial-gradient(3px 3px at 310px 40px, white, transparent),
+                radial-gradient(3px 3px at 30px 250px, white, transparent),
+                radial-gradient(4px 4px at 200px 300px, white, transparent);
+            background-size: 400px 400px;
+            animation: fall 5s linear infinite;
+        }
+        
+        .snow-layer:nth-child(2) {
+            background-image: 
+                radial-gradient(3px 3px at 50px 180px, #ffcccc, transparent),
+                radial-gradient(3px 3px at 180px 10px, #ffcccc, transparent),
+                radial-gradient(2px 2px at 280px 150px, #ffcccc, transparent);
+            background-size: 300px 300px;
+            animation: fall 3s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50%); }
         }
     </style>
 </head>
@@ -266,22 +322,24 @@
 
     <canvas id="void-canvas"></canvas>
 
-    <!-- Setup panel removed as requested -->
-    <!-- NEW FLASHY BIRTHDAY CARD -->
-    <div class="birthday-card">
-        <div class="birthday-title">🎉 HAPPY Birthday, STELIOS! 🎂</div>
-        <div class="birthday-sub">HAVE A SUPER AWESOME DAY!</div>
+    <!-- NEW FLASHY CHRISTMAS CARD -->
+    <div class="christmas-card">
+        <!-- Snow Effect Containers -->
+        <div class="snow-container">
+            <div class="snow-layer"></div>
+            <div class="snow-layer"></div>
+        </div>
+
+        <div class="xmas-title">🎄 MERRY CHRISTMAS! 🎅</div>
+        <div class="xmas-sub">¡FELIZ NAVIDAD! ❄️</div>
     </div>
 
-    
     <div class="container" id="display-area">
         <div class="void-title">THE VOID</div>
         <div class="seconds-count" id="seconds-display">0</div>
         <div class="label-text">SECONDS REMAINING</div>
         <div class="label-text2">ENDS ON 16.03.2026 09:30AM GMT</div>
     </div>
-
-    
 
     <script>
         /* --- VISUALS: The Void Particle Effect --- */

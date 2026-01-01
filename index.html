@@ -212,126 +212,148 @@
             animation: pulse 2s infinite;
         }
 
-        /* --- CHRISTMAS CARD STYLES --- */
-        .christmas-card {
+        /* --- HOPPY NEW YEAR CARD STYLES --- */
+        .new-year-card {
             position: relative;
             z-index: 20;
             margin-top: 30px;
             padding: 20px 40px;
-            /* Gradient: Red, Gold, White, Red */
-            background: linear-gradient(135deg, #b30000, #ff0000, #d4af37, #ffffff, #b30000);
-            background-size: 400% 400%;
+            /* Night sky background */
+            background: linear-gradient(to bottom, #020024 0%, #090979 35%, #220045 100%);
             border-radius: 15px;
-            /* Gold border */
-            border: 4px solid #d4af37;
-            /* Glowing red/gold shadow */
-            box-shadow: 0 0 20px #ff0000, 
-                        0 0 40px #d4af37,
-                        inset 0 0 20px rgba(255,255,255,0.2);
+            /* Neon green border */
+            border: 3px solid #39ff14;
+            /* Flashy neon shadows */
+            box-shadow: 0 0 15px #39ff14, 0 0 30px #ff00ff, inset 0 0 20px rgba(0,0,0,0.5);
             font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
             text-align: center;
-            animation: glowing-xmas 5s ease infinite, bounce 2s infinite ease-in-out;
-            transform: rotate(-3deg);
+            overflow: hidden; /* Keep frogs and fireworks inside */
             max-width: 90%;
-            overflow: hidden; /* Contains the snow */
+            min-width: 320px;
+            transform: rotate(-1deg);
+            animation: float 3s ease-in-out infinite;
         }
 
-        .xmas-title {
+        .ny-title {
             position: relative;
-            z-index: 2; /* Text above snow */
+            z-index: 5;
             color: #ffffff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-shadow: 3px 3px 0px #b30000, 0 0 10px white;
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            /* Neon Text Effect */
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #ff00de,
+                0 0 30px #ff00de,
+                0 0 40px #ff00de;
             margin: 0;
             line-height: 1.2;
-            -webkit-text-stroke: 1px #d4af37;
         }
 
-        .xmas-sub {
+        .ny-sub {
             position: relative;
-            z-index: 2; /* Text above snow */
-            color: #d4af37; /* Gold Text */
-            font-size: 1.5rem;
+            z-index: 5;
+            color: #39ff14; /* Neon Green */
+            font-size: 1.2rem;
             font-weight: bold;
-            text-shadow: 2px 2px 0px #b30000;
+            text-shadow: 0 0 5px #000;
             margin-top: 5px;
-            background: rgba(0,0,0,0.2);
-            padding: 2px 10px;
-            border-radius: 10px;
-            display: inline-block;
         }
 
-        @keyframes glowing-xmas {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-5px) rotate(-3deg); }
-        }
-
-        /* --- SNOW ANIMATION INSIDE CARD --- */
-        .snow-container {
+        /* Fireworks Effect using CSS Gradients */
+        .fireworks {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Below text */
+            z-index: 1;
+            background-image: 
+                radial-gradient(circle, #ff0000 2px, transparent 2.5px),
+                radial-gradient(circle, #ffff00 2px, transparent 2.5px),
+                radial-gradient(circle, #00ff00 2px, transparent 2.5px),
+                radial-gradient(circle, #00ffff 2px, transparent 2.5px);
+            background-size: 0% 0%;
+            background-position: 20% 20%, 80% 80%, 30% 70%, 70% 30%;
+            background-repeat: no-repeat;
+            animation: fireworks-explode 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes fireworks-explode {
+            0% {
+                background-size: 0% 0%;
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                background-size: 150px 150px;
+                opacity: 0;
+            }
+        }
+
+        /* Hopping Frog Animation */
+        .frog-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            z-index: 4;
             pointer-events: none;
         }
 
-        .snow-layer {
+        .frog {
             position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 200%;
-            background-image: 
-                radial-gradient(4px 4px at 20px 30px, white, transparent),
-                radial-gradient(4px 4px at 150px 80px, white, transparent),
-                radial-gradient(3px 3px at 80px 120px, white, transparent),
-                radial-gradient(4px 4px at 250px 200px, white, transparent),
-                radial-gradient(3px 3px at 310px 40px, white, transparent),
-                radial-gradient(3px 3px at 30px 250px, white, transparent),
-                radial-gradient(4px 4px at 200px 300px, white, transparent);
-            background-size: 400px 400px;
-            animation: fall 5s linear infinite;
-        }
-        
-        .snow-layer:nth-child(2) {
-            background-image: 
-                radial-gradient(3px 3px at 50px 180px, #ffcccc, transparent),
-                radial-gradient(3px 3px at 180px 10px, #ffcccc, transparent),
-                radial-gradient(2px 2px at 280px 150px, #ffcccc, transparent);
-            background-size: 300px 300px;
-            animation: fall 3s linear infinite;
-            opacity: 0.7;
+            font-size: 2rem;
+            bottom: 10px;
+            animation: hop-across 4s linear infinite;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50%); }
+        .frog:nth-child(1) { left: -10%; animation-delay: 0s; }
+        .frog:nth-child(2) { left: -10%; animation-delay: 1.5s; font-size: 1.5rem; }
+        .frog:nth-child(3) { left: -10%; animation-delay: 3s; font-size: 2.2rem; }
+
+        @keyframes hop-across {
+            0% { left: -10%; transform: translateY(0) rotate(0deg); }
+            10% { transform: translateY(-30px) rotate(10deg); }
+            20% { transform: translateY(0) rotate(0deg); }
+            30% { transform: translateY(-30px) rotate(-10deg); }
+            40% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            60% { transform: translateY(0) rotate(0deg); }
+            70% { transform: translateY(-30px) rotate(-10deg); }
+            80% { transform: translateY(0) rotate(0deg); }
+            100% { left: 110%; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-5px) rotate(1deg); }
         }
     </style>
 </head>
 <body>
 
     <canvas id="void-canvas"></canvas>
-
-    <!-- NEW FLASHY CHRISTMAS CARD -->
-    <div class="christmas-card">
-        <!-- Snow Effect Containers -->
-        <div class="snow-container">
-            <div class="snow-layer"></div>
-            <div class="snow-layer"></div>
+	
+	<!-- NEW HOPPY NEW YEAR CARD -->
+    <div class="new-year-card">
+        <!-- Fireworks Background -->
+        <div class="fireworks"></div>
+        
+        <!-- Hopping Frogs -->
+        <div class="frog-container">
+            <div class="frog">🐸</div>
+            <div class="frog">🐸</div>
+            <div class="frog">🐸</div>
         </div>
 
-        <div class="xmas-title">🎄 MERRY CHRISTMAS! 🎅</div>
-        <div class="xmas-sub">¡FELIZ NAVIDAD! ❄️</div>
+        <div class="ny-title">🎉 HOPPY <br> NEW YEAR!</div>
     </div>
 
     <div class="container" id="display-area">

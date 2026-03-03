@@ -212,128 +212,90 @@
             animation: pulse 2s infinite;
         }
 
-        /* --- HOPPY NEW YEAR CARD STYLES --- */
-        .new-year-card {
+        /* --- DRAMATIC CARD STYLES --- */
+        .dramatic-card {
             position: relative;
             z-index: 20;
-            margin-top: 30px;
-            padding: 20px 40px;
-            /* Night sky background */
-            background: linear-gradient(to bottom, #020024 0%, #090979 35%, #220045 100%);
-            border-radius: 15px;
-            /* Neon green border */
-            border: 3px solid #39ff14;
-            /* Flashy neon shadows */
-            box-shadow: 0 0 15px #39ff14, 0 0 30px #ff00ff, inset 0 0 20px rgba(0,0,0,0.5);
-            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            margin-bottom: 30px; /* Space between the card and the countdown below it */
+            padding: 40px 30px;
+            background-color: #050005; /* Deep, almost-black violet/red base */
+            border-radius: 4px; /* Sharp corners for a serious tone */
+            border: 1px solid #ff0033; /* Ominous red border */
+            box-shadow: 0 0 20px rgba(255, 0, 50, 0.4), inset 0 0 30px rgba(255, 0, 0, 0.2);
             text-align: center;
-            overflow: hidden; /* Keep frogs and fireworks inside */
+            overflow: hidden; /* Crucial: keeps the sweeping animation strictly inside the card */
             max-width: 90%;
-            min-width: 320px;
-            transform: rotate(-1deg);
-            animation: float 3s ease-in-out infinite;
+            width: 450px;
         }
 
-        .ny-title {
-            position: relative;
-            z-index: 5;
-            color: #ffffff;
-            font-size: 2.2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            /* Neon Text Effect */
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 20px #ff00de,
-                0 0 30px #ff00de,
-                0 0 40px #ff00de;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .ny-sub {
-            position: relative;
-            z-index: 5;
-            color: #39ff14; /* Neon Green */
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-shadow: 0 0 5px #000;
-            margin-top: 5px;
-        }
-
-        /* Fireworks Effect using CSS Gradients */
-        .fireworks {
+        /* Swirling dramatic energy strictly behind the text */
+        .dramatic-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent 0deg, 
+                rgba(255, 0, 50, 0.1) 60deg, 
+                rgba(255, 0, 50, 0.8) 90deg, 
+                transparent 120deg, 
+                rgba(150, 0, 255, 0.1) 240deg, 
+                rgba(150, 0, 255, 0.6) 270deg, 
+                transparent 300deg
+            );
+            animation: spin-dramatic 5s linear infinite;
             z-index: 1;
-            background-image: 
-                radial-gradient(circle, #ff0000 2px, transparent 2.5px),
-                radial-gradient(circle, #ffff00 2px, transparent 2.5px),
-                radial-gradient(circle, #00ff00 2px, transparent 2.5px),
-                radial-gradient(circle, #00ffff 2px, transparent 2.5px);
-            background-size: 0% 0%;
-            background-position: 20% 20%, 80% 80%, 30% 70%, 70% 30%;
-            background-repeat: no-repeat;
-            animation: fireworks-explode 2s infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes fireworks-explode {
-            0% {
-                background-size: 0% 0%;
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                background-size: 150px 150px;
-                opacity: 0;
-            }
-        }
-
-        /* Hopping Frog Animation */
-        .frog-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            z-index: 4;
             pointer-events: none;
         }
 
-        .frog {
+        /* Dark vignette overlay to frame the text and make it highly readable */
+        .dramatic-overlay {
             position: absolute;
-            font-size: 2rem;
-            bottom: 10px;
-            animation: hop-across 4s linear infinite;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 10%, #050005 85%);
+            z-index: 2;
+            pointer-events: none;
         }
 
-        .frog:nth-child(1) { left: -10%; animation-delay: 0s; }
-        .frog:nth-child(2) { left: -10%; animation-delay: 1.5s; font-size: 1.5rem; }
-        .frog:nth-child(3) { left: -10%; animation-delay: 3s; font-size: 2.2rem; }
-
-        @keyframes hop-across {
-            0% { left: -10%; transform: translateY(0) rotate(0deg); }
-            10% { transform: translateY(-30px) rotate(10deg); }
-            20% { transform: translateY(0) rotate(0deg); }
-            30% { transform: translateY(-30px) rotate(-10deg); }
-            40% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-            60% { transform: translateY(0) rotate(0deg); }
-            70% { transform: translateY(-30px) rotate(-10deg); }
-            80% { transform: translateY(0) rotate(0deg); }
-            100% { left: 110%; transform: translateY(0); }
+        /* Container keeping text above the chaotic background */
+        .dramatic-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-1deg); }
-            50% { transform: translateY(-5px) rotate(1deg); }
+        .dramatic-title {
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin: 0;
+            text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
+            animation: text-pulse 3s ease-in-out infinite;
+        }
+
+        .dramatic-text {
+            color: #dcdcdc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-style: italic;
+            text-shadow: 2px 2px 4px #000000;
+            letter-spacing: 1px;
+        }
+
+        /* Animation Keyframes */
+        @keyframes spin-dramatic {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes text-pulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033; }
+            50% { opacity: 0.8; text-shadow: 0 0 5px #ff0033, 0 0 10px #880011; transform: scale(0.98); }
         }
     </style>
 </head>
@@ -341,19 +303,18 @@
 
     <canvas id="void-canvas"></canvas>
 	
-	<!-- NEW HOPPY NEW YEAR CARD -->
-    <div class="new-year-card">
-        <!-- Fireworks Background -->
-        <div class="fireworks"></div>
+	<!-- NEW DRAMATIC CARD -->
+    <div class="dramatic-card">
+        <!-- Dramatic Background Animations -->
+        <div class="dramatic-bg"></div>
+        <div class="dramatic-overlay"></div>
         
-        <!-- Hopping Frogs -->
-        <div class="frog-container">
-            <div class="frog">🐸</div>
-            <div class="frog">🐸</div>
-            <div class="frog">🐸</div>
+        <!-- Editable Content -->
+        <div class="dramatic-content">
+            <div class="dramatic-title">RETURN OF THE FROG KING</div>
+            <div class="dramatic-text">[ The frog army awaits ]
+            </div>
         </div>
-
-        <div class="ny-title">🎉 HOPPY <br> NEW YEAR!</div>
     </div>
 
     <div class="container" id="display-area">
@@ -369,7 +330,7 @@
         const ctx = canvas.getContext('2d');
         
         let width, height;
-        let particles = [];
+        let particles =[];
 
         function resize() {
             width = canvas.width = window.innerWidth;
@@ -481,6 +442,3 @@
         updateTimer();
         setInterval(updateTimer, 1000); // 1000ms is sufficient for seconds-only display
     </script>
-</body>
-
-</html>
